@@ -155,7 +155,7 @@ form .signup-link a:hover{
           <div class="row button">
             <input type="submit" value="Signup">
           </div>
-          <div class="signup-link">Already have a member? <a href="{{url('login')}}">Login now</a></div>
+          <div class="signup-link">Already have an account? <a href="{{url('login')}}">Login now</a></div>
         </form>
       </div>
     </div>
