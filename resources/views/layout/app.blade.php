@@ -21,17 +21,27 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{('./')}}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{url('login')}}">login</a>
-          </li>
+          @auth
 
+        <a href="{{route('login')}}" class="p-2 nav-link">{{auth()->user()->name}}</a>
+          @endauth
+
+
+          @guest
           <li class="nav-item">
             <a class="nav-link" href="{{url('register')}}">Signup</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{url('login')}}">login</a>
+          </li>
+              
+          @endguest
+          
+          <li class="nav-item">
             <a class="nav-link" href="{{url('logout')}}">logout</a>
           </li>
         
+
         </ul>
       </div>
     </div>

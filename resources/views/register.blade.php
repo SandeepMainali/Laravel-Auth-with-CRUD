@@ -3,34 +3,168 @@
 
 @section('content')
 
+@if(Session::has('fail'))
+<div class="alert alert-danger" role="alert">
+  {{Session::get('fail')}}
+</div>
+
+@endif
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style> 
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif;
+}
+body{
+  background: #1abc9c;
+  overflow: hidden;
+}
+::selection{
+  background: rgba(26,188,156,0.3);
+}
+.container{
+  max-width: 440px;
+  padding: 0 20px;
+  margin: 170px auto;
+}
+.wrapper{
+  width: 100%;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
+}
+.wrapper .title{
+  height: 90px;
+  background: #16a085;
+  border-radius: 5px 5px 0 0;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper form{
+  padding: 30px 25px 25px 25px;
+}
+.wrapper form .row{
+  height: 45px;
+  margin-bottom: 15px;
+  position: relative;
+}
+.wrapper form .row input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding-left: 60px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+form .row input:focus{
+  border-color: #16a085;
+  box-shadow: inset 0px 0px 2px 2px rgba(26,188,156,0.25);
+}
+form .row input::placeholder{
+  color: #999;
+}
+.wrapper form .row i{
+  position: absolute;
+  width: 47px;
+  height: 100%;
+  color: #fff;
+  font-size: 18px;
+  background: #16a085;
+  border: 1px solid #16a085;
+  border-radius: 5px 0 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper form .pass{
+  margin: -8px 0 20px 0;
+}
+.wrapper form .pass a{
+  color: #16a085;
+  font-size: 17px;
+  text-decoration: none;
+}
+.wrapper form .pass a:hover{
+  text-decoration: underline;
+}
+.wrapper form .button input{
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 0px;
+  background: #16a085;
+  border: 1px solid #16a085;
+  cursor: pointer;
+}
+form .button input:hover{
+  background: #12876f;
+}
+.wrapper form .signup-link{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 17px;
+}
+.wrapper form .signup-link a{
+  color: #16a085;
+  text-decoration: none;
+}
+form .signup-link a:hover{
+  text-decoration: underline;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="title"><span>Register Form</span></div>
+        <form action="{{route('register')}}" method="POST">
+          @csrf
+          <div class="row">
+            <i class="fas fa-user"></i>
+            <input type="name" placeholder= "Enter Your Name" class="form-control @error('name') is-invalid @enderror" id=" " name="name" aria-describedby="nameHelp">
+              <span style="color: red;">@error('name') {{$message}} @enderror </span>
+          </div>
+          <div class="row">
+            <i class="fas fa-user"></i>
+            <input type="email" placeholder= "Enter Your Email" class="form-control @error('email') is-invalid @enderror" id=" " name="email" aria-describedby="nameHelp">
+              <span style="color: red;">@error('email') {{$message}} @enderror </span>
+          </div>
+          <div class="row">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder= "Enter Your Password" class="form-control @error('password') is-invalid @enderror" name="password" id=" ">
+              <span style="color: red;">@error('password') {{$message}} @enderror </span>
+          </div>
+       
+          <div class="row button">
+            <input type="submit" value="Signup">
+          </div>
+          <div class="signup-link">Already have a member? <a href="{{url('login')}}">Login now</a></div>
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>
 
 
-<form action="{{route('register')}}" method="POST">
-    @csrf
 
-    
-    <h1>Signup Here</h1>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Name</label>
-      <input type="name" class="form-control @error('name') is-invalid @enderror" id=" " name="name" aria-describedby="nameHelp"><br>
-      <span style="color: red;">@error('name') {{$message}} @enderror </span><br>
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" class="form-control @error('email') is-invalid @enderror " id=" " name="email" aria-describedby="emailHelp"><br>
-      <span style="color: red;">@error('name') {{$message}} @enderror </span><br>
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id=" "><br>
-      <span style="color: red;">@error('name') {{$message}} @enderror </span><br>
-    </div>
-    <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-    
     
 @endsection
  
