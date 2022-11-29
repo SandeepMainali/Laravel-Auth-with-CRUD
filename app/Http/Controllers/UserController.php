@@ -40,8 +40,10 @@ class UserController extends Controller
 
         if (Auth::attempt($req->only('email', 'password'))){
             return redirect()->route('dashboard');
+            // dd('login');
         }else{
             return back()->with('fail','Login failed');
+            // dd('login fail');
         }
  
    }
